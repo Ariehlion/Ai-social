@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createRouteHandlerClient } from '@/lib/supabase'
-import { OpenAI } from 'openai'
+import { GoogleGenerativeAI } from '@google/generative-ai'
 import { Platform, GenerateRequest } from '@/lib/types'
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
 const platformPrompts = {
   twitter: `Create 3-5 engaging Twitter posts based on the following content. Each post should:
@@ -104,23 +102,26 @@ ${contentToProcess}
 
 Please provide exactly 3-5 different posts, each on a new line, without numbering or bullet points. Each post should be complete and ready to publish.`
 
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'system',
-          content: 'You are a social media expert who creates engaging posts for different platforms. Always return posts separated by double newlines, without any numbering or formatting.'
-        },
-        {
-          role: 'user',
-          content: prompt
-        }
-      ],
-      max_tokens: 1000,
-      temperature: 0.7,
-    })
+    // Initialize the Gemini model
+    console.log('Initializing Gemini model...')
+    console.log('API Key exists:', !!process.env.GEMINI_API_KEY)
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
 
-    const generatedContent = completion.choices[0]?.message?.content || ''
+    // Generate content using Gemini
+    const fullPrompt = `You are a social media expert who creates engaging posts for different platforms. Always return posts separated by double newlines, without any numbering or formatting.\n\n${prompt}`
+    
+    console.log('Sending request to Gemini...')
+    const result = await model.generateContent({
+      contents: [{
+        parts: [{
+          text: fullPrompt
+        }]
+      }]
+    })
+    console.log('Received response from Gemini')
+
+    const response = await result.response
+    const generatedContent = response.text()
     const posts = generatedContent.split('\n\n').filter(post => post.trim().length > 0)
 
     await supabase
@@ -140,15 +141,15 @@ Please provide exactly 3-5 different posts, each on a new line, without numberin
   } catch (error) {
     console.error('Error generating content:', error)
     
-    // More specific error handling for OpenAI API errors
+    // More specific error handling for Gemini API errors
     if (error instanceof Error) {
-      if (error.message.includes('API key')) {
-        return NextResponse.json({ error: 'Invalid OpenAI API key' }, { status: 401 })
+      if (error.message.includes('API key') || error.message.includes('API_KEY')) {
+        return NextResponse.json({ error: 'Invalid Gemini API key' }, { status: 401 })
       }
-      if (error.message.includes('quota')) {
-        return NextResponse.json({ error: 'OpenAI API quota exceeded' }, { status: 429 })
+      if (error.message.includes('quota') || error.message.includes('QUOTA')) {
+        return NextResponse.json({ error: 'Gemini API quota exceeded' }, { status: 429 })
       }
-      if (error.message.includes('model')) {
+      if (error.message.includes('model') || error.message.includes('MODEL')) {
         return NextResponse.json({ error: 'Invalid model or model access denied' }, { status: 400 })
       }
       return NextResponse.json({ error: error.message }, { status: 500 })

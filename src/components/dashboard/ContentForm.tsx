@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Platform } from '@/lib/types'
 
 interface ContentFormProps {
@@ -13,6 +13,9 @@ export default function ContentForm({ onGenerate, loading, remainingGenerations 
   const [content, setContent] = useState('')
   const [platform, setPlatform] = useState<Platform>('twitter')
   const [inputType, setInputType] = useState<'text' | 'url'>('text')
+  
+  const containerRef = useRef<HTMLDivElement>(null)
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -20,6 +23,7 @@ export default function ContentForm({ onGenerate, loading, remainingGenerations 
       onGenerate(content, platform)
     }
   }
+
 
   const platformDescriptions = {
     twitter: '280 characters max, use hashtags and mentions',
@@ -29,17 +33,17 @@ export default function ContentForm({ onGenerate, loading, remainingGenerations 
   }
 
   return (
-    <div className="card bg-base-100 shadow-xl">
+    <div ref={containerRef} className="card bg-base-100 shadow-xl">
       <div className="card-body">
         <h2 className="card-title text-2xl mb-6 flex items-center">
           <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
           </svg>
-          Generate Social Content
+          <span>Generate Social Content</span>
         </h2>
         
         {/* Input Type Toggle */}
-        <div className="form-control mb-6">
+        <div className="form-control mb-6 form-element">
           <div className="tabs tabs-boxed bg-base-200 p-1">
             <button
               onClick={() => setInputType('text')}
@@ -68,7 +72,7 @@ export default function ContentForm({ onGenerate, loading, remainingGenerations 
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Content Input */}
-          <div className="form-control">
+          <div className="form-control form-element">
             <label className="label" htmlFor="content">
               <span className="label-text font-medium">
                 {inputType === 'text' ? 'Blog Article Content' : 'Blog Article URL'}
@@ -77,18 +81,29 @@ export default function ContentForm({ onGenerate, loading, remainingGenerations 
                 {inputType === 'text' ? 'Paste your content below' : 'Enter article URL'}
               </span>
             </label>
-            <textarea
-              id="content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              rows={8}
-              className="textarea textarea-bordered textarea-primary w-full text-sm"
-              placeholder={inputType === 'text' 
-                ? "Paste your blog article text here... The AI will analyze and generate engaging social media posts optimized for your chosen platform."
-                : "Enter the URL of your blog article here... The AI will fetch, analyze, and transform the content into platform-specific social media posts."
-              }
-              required
-            />
+            {inputType === 'text' ? (
+              <textarea
+                id="content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                rows={8}
+                className="textarea textarea-bordered textarea-primary w-full text-sm"
+                placeholder="Paste your blog article text here... The AI will analyze and generate engaging social media posts optimized for your chosen platform."
+                required
+                autoFocus
+              />
+            ) : (
+              <input
+                type="url"
+                id="content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className="input input-bordered input-primary w-full text-sm"
+                placeholder="Enter the URL of your blog article here... The AI will fetch, analyze, and transform the content into platform-specific social media posts."
+                required
+                autoFocus
+              />
+            )}
           </div>
 
           {/* Platform Selection */}

@@ -141,14 +141,14 @@ CREATE TABLE IF NOT EXISTS user_subscriptions (
 
 -- Additional columns are already included in the CREATE TABLE statements above
 
--- Create indexes for better performance
+- Create indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_posts_status ON posts(status);
 CREATE INDEX IF NOT EXISTS idx_posts_scheduled_for ON posts(scheduled_for);
 CREATE INDEX IF NOT EXISTS idx_posts_tone ON posts(tone);
 CREATE INDEX IF NOT EXISTS idx_posts_platform ON posts(platform);
 CREATE INDEX IF NOT EXISTS idx_posts_updated_at ON posts(updated_at);
 CREATE INDEX IF NOT EXISTS idx_post_tags_post_id ON post_tags(post_id);
-CREATE INDEX IF NOT EXISTS idx_post_tags_tag_id ON post_tags(tag_id);
+CREATE INDEX IF NOT E-XISTS idx_post_tags_tag_id ON post_tags(tag_id);
 CREATE INDEX IF NOT EXISTS idx_templates_user_id ON templates(user_id);
 CREATE INDEX IF NOT EXISTS idx_templates_platform ON templates(platform);
 CREATE INDEX IF NOT EXISTS idx_bookmarks_user_id ON bookmarks(user_id);

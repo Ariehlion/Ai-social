@@ -6,7 +6,7 @@ A web application that transforms blog articles into engaging social media posts
 
 - **User Authentication**: Email/password authentication using Supabase Auth
 - **Multi-Platform Support**: Generate posts for Twitter, LinkedIn, Instagram, and Facebook
-- **AI-Powered Generation**: Uses OpenAI GPT-4 to create platform-specific content
+- **AI-Powered Generation**: Uses Google Gemini AI to create platform-specific content
 - **Usage Tracking**: Daily generation limits (5 for free users, 50 for pro users)
 - **Content Management**: Save and manage generated posts
 - **Responsive Design**: Mobile-friendly interface built with Tailwind CSS
@@ -17,7 +17,7 @@ A web application that transforms blog articles into engaging social media posts
 - **Styling**: Tailwind CSS
 - **Authentication**: Supabase Auth
 - **Database**: Supabase (PostgreSQL)
-- **AI**: OpenAI GPT-4
+- **AI**: Google Gemini AI
 - **Deployment**: Vercel-ready
 
 ## Setup Instructions
@@ -26,7 +26,7 @@ A web application that transforms blog articles into engaging social media posts
 
 - Node.js 18+ installed
 - Supabase account
-- OpenAI API key
+- Google Gemini API key
 
 ### 1. Clone and Install
 
@@ -50,15 +50,17 @@ Create a `.env.local` file in the root directory:
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 
-# OpenAI
-OPENAI_API_KEY=your_openai_api_key
-
-# Next.js
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your_nextauth_secret
+# Google Gemini AI
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
+
+### 3.1 Getting a Gemini API Key
+
+1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Click "Create API Key"
+3. Copy the generated API key
+4. Add it to your `.env.local` file as `GEMINI_API_KEY`
 
 ### 4. Database Setup
 

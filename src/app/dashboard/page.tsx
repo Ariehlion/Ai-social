@@ -206,7 +206,7 @@ export default function DashboardPage() {
                     </h3>
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-sm opacity-70">Today's Usage</span>
+                        <span className="text-sm opacity-70">Today&apos;s Usage</span>
                         <span className="font-medium">{userProfile?.daily_generations || 0}</span>
                       </div>
                       <div className="flex justify-between">
