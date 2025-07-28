@@ -42,32 +42,33 @@ export default function AuthForm() {
   }
 
   return (
-    <div className="min-h-screen hero bg-gradient-to-br from-primary/20 to-secondary/20">
-      <div className="hero-content text-center">
-        <div className="max-w-md w-full">
-          {/* Logo and Title */}
-          <div className="mb-8">
-            <div className="avatar placeholder mb-4">
-              <div className="bg-primary text-primary-content w-20 h-20 rounded-full">
-                <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
-                </svg>
-              </div>
-            </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
-              AI Social Generator
+    <div className="min-h-screen bg-white relative flex items-center justify-center px-4">
+      {/* Fixed Background Pattern */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f3f4f6' fill-opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '60px 60px'
+        }}></div>
+      </div>
+      
+      <div className="relative z-10 max-w-md w-full">
+        <div className="fade-in">
+          {/* Wix-Style Logo and Title */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-black mb-4">
+              SocialAI
             </h1>
-            <p className="text-base-content/70">
-              Transform your content into engaging social media posts
+            <p className="text-gray-600 text-lg">
+              Transform ideas into viral social content
             </p>
           </div>
 
-          {/* Auth Card */}
-          <div className="card bg-base-100 shadow-2xl">
-            <div className="card-body">
-              <h2 className="card-title justify-center text-2xl mb-6">
-                {isLogin ? 'Welcome Back!' : 'Get Started Today'}
-              </h2>
+          {/* Wix-Style Auth Card */}
+          <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-8">
+            <h2 className="text-center text-2xl font-bold text-black mb-8">
+              {isLogin ? 'Welcome Back' : 'Get Started'}
+            </h2>
               
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="form-control">
@@ -119,8 +120,8 @@ export default function AuthForm() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className={`btn btn-primary w-full ${
-                      loading ? 'loading' : ''
+                    className={`w-full py-3 px-4 bg-black text-white rounded-full hover:bg-gray-800 transition-all font-medium ${
+                      loading ? 'opacity-50 cursor-not-allowed' : ''
                     }`}
                   >
                     {loading ? (
@@ -148,7 +149,7 @@ export default function AuthForm() {
               <button
                 type="button"
                 onClick={() => setIsLogin(!isLogin)}
-                className="btn btn-ghost btn-sm"
+                className="w-full py-2 text-gray-600 hover:text-black transition-colors"
               >
                 {isLogin ? 'Need an account? Sign up' : 'Already have an account? Sign in'}
               </button>
@@ -156,28 +157,28 @@ export default function AuthForm() {
           </div>
           
           {/* Features Preview */}
-          <div className="mt-8 text-center">
+          <div className="mt-8 text-center slide-in-left stagger-delay-500">
             <div className="grid grid-cols-2 gap-4 text-sm">
-              <div className="flex items-center justify-center gap-2 text-base-content/70">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center justify-center gap-2 text-gray-600 bg-white/40 backdrop-blur-sm rounded-lg p-3 border border-white/30">
+                <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
                 AI-Powered Generation
               </div>
-              <div className="flex items-center justify-center gap-2 text-base-content/70">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center justify-center gap-2 text-gray-600 bg-white/40 backdrop-blur-sm rounded-lg p-3 border border-white/30">
+                <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2M7 4h10M7 4l-2 16h14l-2-16M10 9v6m4-6v6" />
                 </svg>
                 Multiple Platforms
               </div>
-              <div className="flex items-center justify-center gap-2 text-base-content/70">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center justify-center gap-2 text-gray-600 bg-white/40 backdrop-blur-sm rounded-lg p-3 border border-white/30">
+                <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                 </svg>
                 Save & Organize
               </div>
-              <div className="flex items-center justify-center gap-2 text-base-content/70">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center justify-center gap-2 text-gray-600 bg-white/40 backdrop-blur-sm rounded-lg p-3 border border-white/30">
+                <svg className="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
                 Performance Analytics

@@ -2,6 +2,7 @@
   "name": "ai-social-generator",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -9,13 +10,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@builder.io/react": "^8.2.6",
-    "@builder.io/sdk": "^6.1.2",
     "@google/generative-ai": "^0.24.1",
     "@gsap/react": "^2.1.2",
+    "@modelcontextprotocol/sdk": "^1.16.0",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.51.0",
     "animate.css": "^4.1.1",
+    "axios": "^1.10.0",
     "gsap": "^3.13.0",
     "next": "15.3.5",
     "openai": "^5.9.0",
@@ -34,5 +35,18 @@
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
-  }
+  },
+  "description": "A web application that transforms blog articles into engaging social media posts for multiple platforms using AI.",
+  "main": "tailwind.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ariehlion/Ai-social.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ariehlion/Ai-social/issues"
+  },
+  "homepage": "https://github.com/Ariehlion/Ai-social#readme"
 }

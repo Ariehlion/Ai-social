@@ -18,7 +18,6 @@ A web application that transforms blog articles into engaging social media posts
 - **Authentication**: Supabase Auth
 - **Database**: Supabase (PostgreSQL)
 - **AI**: Google Gemini AI
-- **CMS**: Builder.io for visual page building
 - **Deployment**: Vercel-ready
 
 ## Setup Instructions
@@ -28,7 +27,6 @@ A web application that transforms blog articles into engaging social media posts
 - Node.js 18+ installed
 - Supabase account
 - Google Gemini API key
-- Builder.io account
 
 ### 1. Clone and Install
 
@@ -56,8 +54,6 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 # Google Gemini AI
 GEMINI_API_KEY=your_gemini_api_key_here
 
-# Builder.io
-NEXT_PUBLIC_BUILDER_API_KEY=your_builder_io_api_key_here
 ```
 
 ### 3.1 Getting a Gemini API Key
@@ -67,13 +63,6 @@ NEXT_PUBLIC_BUILDER_API_KEY=your_builder_io_api_key_here
 3. Copy the generated API key
 4. Add it to your `.env.local` file as `GEMINI_API_KEY`
 
-### 3.2 Getting a Builder.io API Key
-
-1. Go to [Builder.io](https://builder.io) and create an account
-2. Create a new space or use an existing one
-3. Go to Account Settings > API Keys
-4. Copy your Public API Key
-5. Add it to your `.env.local` file as `NEXT_PUBLIC_BUILDER_API_KEY`
 
 ### 4. Database Setup
 

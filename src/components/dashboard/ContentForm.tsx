@@ -33,38 +33,29 @@ export default function ContentForm({ onGenerate, loading, remainingGenerations 
   }
 
   return (
-    <div ref={containerRef} className="card bg-base-100 shadow-xl">
-      <div className="card-body">
-        <h2 className="card-title text-2xl mb-6 flex items-center">
-          <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
-          </svg>
-          <span>Generate Social Content</span>
+    <div ref={containerRef} className="bg-white border border-gray-200 rounded-lg shadow-lg">
+      <div className="p-8">
+        <h2 className="text-2xl font-bold text-black mb-8">
+          Generate Social Content
         </h2>
         
         {/* Input Type Toggle */}
-        <div className="form-control mb-6 form-element">
-          <div className="tabs tabs-boxed bg-base-200 p-1">
+        <div className="mb-8">
+          <div className="bg-gray-100 rounded-full p-1 inline-flex">
             <button
               onClick={() => setInputType('text')}
-              className={`tab flex-1 ${
-                inputType === 'text' ? 'tab-active' : ''
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                inputType === 'text' ? 'bg-black text-white' : 'text-gray-600 hover:text-black'
               }`}
             >
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
               Text Input
             </button>
             <button
               onClick={() => setInputType('url')}
-              className={`tab flex-1 ${
-                inputType === 'url' ? 'tab-active' : ''
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                inputType === 'url' ? 'bg-black text-white' : 'text-gray-600 hover:text-black'
               }`}
             >
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-              </svg>
               URL Input
             </button>
           </div>
@@ -87,7 +78,7 @@ export default function ContentForm({ onGenerate, loading, remainingGenerations 
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 rows={8}
-                className="textarea textarea-bordered textarea-primary w-full text-sm"
+                className="w-full p-4 border border-gray-300 rounded-lg focus:border-black focus:outline-none text-sm"
                 placeholder="Paste your blog article text here... The AI will analyze and generate engaging social media posts optimized for your chosen platform."
                 required
                 autoFocus
@@ -98,7 +89,7 @@ export default function ContentForm({ onGenerate, loading, remainingGenerations 
                 id="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="input input-bordered input-primary w-full text-sm"
+                className="w-full p-4 border border-gray-300 rounded-lg focus:border-black focus:outline-none text-sm"
                 placeholder="Enter the URL of your blog article here... The AI will fetch, analyze, and transform the content into platform-specific social media posts."
                 required
                 autoFocus

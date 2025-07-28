@@ -105,19 +105,22 @@ Please provide exactly 3-5 different posts, each on a new line, without numberin
     // Initialize the Gemini model
     console.log('Initializing Gemini model...')
     console.log('API Key exists:', !!process.env.GEMINI_API_KEY)
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
+    console.log('Full API Key (first 10 chars):', process.env.GEMINI_API_KEY?.substring(0, 10))
+    console.log('Environment:', process.env.NODE_ENV)
+    
+    if (!process.env.GEMINI_API_KEY) {
+      console.error('GEMINI_API_KEY is not set!')
+      return NextResponse.json({ error: 'Gemini API key not configured' }, { status: 500 })
+    }
+    
+    
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" })
 
     // Generate content using Gemini
     const fullPrompt = `You are a social media expert who creates engaging posts for different platforms. Always return posts separated by double newlines, without any numbering or formatting.\n\n${prompt}`
     
     console.log('Sending request to Gemini...')
-    const result = await model.generateContent({
-      contents: [{
-        parts: [{
-          text: fullPrompt
-        }]
-      }]
-    })
+    const result = await model.generateContent(fullPrompt)
     console.log('Received response from Gemini')
 
     const response = await result.response
@@ -139,7 +142,16 @@ Please provide exactly 3-5 different posts, each on a new line, without numberin
     })
 
   } catch (error) {
+    console.error('===== FULL ERROR DETAILS =====')
     console.error('Error generating content:', error)
+    console.error('Error type:', typeof error)
+    console.error('Error constructor:', error?.constructor?.name)
+    
+    if (error instanceof Error) {
+      console.error('Error message:', error.message)
+      console.error('Error stack:', error.stack)
+    }
+    console.error('===== END ERROR DETAILS =====')
     
     // More specific error handling for Gemini API errors
     if (error instanceof Error) {
@@ -152,6 +164,7 @@ Please provide exactly 3-5 different posts, each on a new line, without numberin
       if (error.message.includes('model') || error.message.includes('MODEL')) {
         return NextResponse.json({ error: 'Invalid model or model access denied' }, { status: 400 })
       }
+      console.error('Returning generic error message:', error.message)
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
     
